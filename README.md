@@ -2,6 +2,16 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Installing MUI
+
+In the project directory, run the following commands:
+
+### `npm install @mui/material @emotion/react @emotion/styled`
+
+### `npm install @fontsource/roboto`
+
+### `npm install @mui/icons-material`
+
 ## Available Scripts
 
 In the project directory, you can run:
