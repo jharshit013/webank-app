@@ -13,7 +13,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Person2Rounded } from '@mui/icons-material';
 import { SvgIcon } from '@mui/material';
-import { ReactComponent as Logo } from '../webank-logo.svg'
+import { ReactComponent as Logo } from '../webank-logo.svg';
+import Link from '@mui/material/Link';
 
 const pages = ['Login', 'Register', 'Open Account', 'Check Account Status'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -105,7 +106,7 @@ function NavBar() {
                         variant="h5"
                         noWrap
                         component="a"
-                        href="/"
+                        // href="/"
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
@@ -117,10 +118,13 @@ function NavBar() {
                             textDecoration: 'none',
                         }}
                     >
-                        WeBank
+                        <Link href="/">
+                            WeBank
+                        </Link>
+
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
+                        {/* {pages.map((page) => (
                             <Button
                                 key={page}
                                 onClick={handleCloseNavMenu}
@@ -128,7 +132,31 @@ function NavBar() {
                             >
                                 {page}
                             </Button>
-                        ))}
+                        ))} */}
+                        <Button
+                            href="/login"
+                            key="Login"
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Login
+                        </Button>
+                        <Button
+                            href="/register"
+                            key="Register"
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Register
+                        </Button>
+                        <Button
+                            href="/openaccount"
+                            key="OpenAccount"
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Open Account
+                        </Button>
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
