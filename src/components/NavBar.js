@@ -16,7 +16,7 @@ import { SvgIcon } from '@mui/material';
 import { ReactComponent as Logo } from '../webank-logo.svg';
 import Link from '@mui/material/Link';
 
-const pages = ['Login', 'Register', 'Open Account', 'Check Account Status'];
+const pages = ['Login', 'Register', 'Open Account', 'Check Account Status', 'Dashboard'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function NavBar() {
@@ -157,6 +157,17 @@ function NavBar() {
                         >
                             Open Account
                         </Button>
+
+                        <Button
+                            href="/dashboard"
+                            key="Dashboard"
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Dashboard
+                        </Button>
+
+
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
@@ -187,7 +198,12 @@ function NavBar() {
                                 </MenuItem>
                             ))}
                         </Menu>
+
+
                     </Box>
+
+
+
                 </Toolbar>
             </Container>
         </AppBar >
