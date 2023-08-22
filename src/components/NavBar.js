@@ -98,9 +98,9 @@ function NavBar() {
                             ))}
                         </Menu>
                     </Box>
-                    <SvgIcon>
+                    {/* <SvgIcon>
                         <Logo />
-                    </SvgIcon>
+                    </SvgIcon> */}
                     <Typography
                         variant="h5"
                         noWrap

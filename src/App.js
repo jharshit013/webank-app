@@ -1,5 +1,7 @@
 import './App.css';
+import SignIn from './components/Login';
 import NavBar from './components/NavBar';
+import SignUp from './components/Register';
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
           minWidth: '100vw'
         }}>
           <NavBar />
+          <SignIn />
+          <SignUp />
         </div>
       </section>
     </div>

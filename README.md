@@ -1,3 +1,13 @@
+# Running the Project on your system
+
+Run the following commands
+
+### `npm install`
+
+### `npm start`
+
+That's it! Ignore the rest of the document.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
