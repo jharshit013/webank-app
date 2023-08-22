@@ -4,6 +4,7 @@ import SignIn from './components/Login';
 import NavBar from './components/NavBar';
 import OpenAccount from './components/OpenAccount';
 import SignUp from './components/Register';
+import Dashboard from './components/Dashboard';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
               <Route path='/login' Component={SignIn} />
               <Route path='/register' Component={SignUp} />
               <Route path='/openaccount' Component={OpenAccount} />
+              <Route path='/dashboard' Component={Dashboard} />
             </Routes>
           </Router>
         </div>
