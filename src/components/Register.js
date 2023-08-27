@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +13,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import { useState } from 'react';
+import {useNavigate} from 'react-router-dom';
+import AuthenticationService from '../service/AuthenticationService';
 
 function Copyright(props) {
   return (
@@ -31,13 +36,103 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+  const history = useNavigate();
+
+  const [account, setAccount] = useState({
+    accountno: '',
+    password: '',
+    transactionpassword: '',
+    balance: 4000000,
+    type: 'current'
+  });
+
+  const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState('');
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   console.log({
+  //     email: data.get('email'),
+  //     password: data.get('password'),
+  //   });
+  // };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name.includes('.')) {
+      const [parent, child] = name.split('.');
+      setAccount((prevAccount) => ({
+        ...prevAccount,
+        [parent]: {
+          ...prevAccount[parent],
+          [child]: value
+        }
+      }));
+    } else {
+      setAccount((prevAccount) => ({
+        ...prevAccount,
+        [name]: value
+      }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const validationErrors = validateForm();
+
+    console.log(JSON.stringify(validationErrors, 4, 4));
+
+    if (Object.keys(validationErrors).length === 0){
+      try {
+        await AuthenticationService.registerAccount(account);
+        setSuccessMessage('Netbanking Registration successful!');
+        alert("Netbanking Registration Successful");
+        setTimeout(() => {
+          history('/login');
+        }, 3000)
+      }
+      catch (error) {
+        console.error('Registration error', error);
+        setSuccessMessage('An error occurred during netbanking registration.');
+      }
+    } else {
+      console.log("Yoo");
+      setErrors(validationErrors);
+    }
+  };
+
+  const validateForm = () => {
+    let validateErrors = {};
+
+    if(!account.accountno) {
+      validateErrors.accountno = 'Account Number required.';
+    }
+
+    if(!account.password) {
+      validateErrors.password = 'Password is required.';
+    } else if (account.password.length < 6) {
+      validateErrors.password = 'Password must be at least 6 characters.';
+    }
+
+    if(!account.transactionpassword) {
+      validateErrors.transactionpassword = 'Transaction Password is required.';
+    } else if (account.transactionpassword.length < 6) {
+      validateErrors.transactionpassword = 'Transaction Password must be at least 6 characters.';
+    }
+
+    if(!account.balance) {
+      validateErrors.balance = 'Account balance required.';
+    }
+
+    if(!account.type) {
+      validateErrors.type = 'Account type required.';
+    }
+
+    return validateErrors;
+
   };
 
   return (
@@ -56,8 +151,9 @@ export default function SignUp() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Register for Netbanking
           </Typography>
+          {successMessage && <p>{successMessage}</p>}
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               {/* <Grid item xs={12} sm={6}>
@@ -85,12 +181,15 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="accountNo"
+                  id="accountno"
                   label="Account Number"
-                  name="accountNo"
-                  autoComplete="accountNo"
+                  name="accountno"
+                  value={account.accountno}
+                  onChange={handleChange}
+                  // autoComplete="accountno"
                 />
               </Grid>
+              {errors.accountno && <p>{errors.accountno}</p>}
               <Grid item xs={12}>
                 <TextField
                   required
@@ -99,20 +198,50 @@ export default function SignUp() {
                   label="Password"
                   type="password"
                   id="password"
-                  autoComplete="new-password"
+                  value={account.password}
+                  onChange={handleChange}
+                  // autoComplete="new-password"
                 />
               </Grid>
+              {errors.password && <p>{errors.password}</p>}
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="transactionPassword"
+                  name="transactionpassword"
                   label="Transaction Password"
                   type="password"
-                  id="transactionPassword"
-                  autoComplete="new-transaction-password"
+                  id="transactionpassword"
+                  value={account.transactionpassword}
+                  onChange={handleChange}
+                  // autoComplete="new-transaction-password"
                 />
               </Grid>
+              {errors.transactionpassword && <p>{errors.transactionpassword}</p>}
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="balance"
+                  label="Account Balance"
+                  id="balance"
+                  value={account.balance}
+                  onChange={handleChange}
+                />
+              </Grid>
+              {errors.balance && <p>{errors.balance}</p>}
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="type"
+                  label="Account type"
+                  id="type"
+                  value={account.type}
+                  onChange={handleChange}
+                />
+              </Grid>
+              {errors.type && <p>{errors.type}</p>}
               {/* <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}

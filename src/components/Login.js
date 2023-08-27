@@ -59,7 +59,7 @@ export default function SignIn() {
       if (loginSuccess) {
         setSuccessMessage('Login successful. Redirecting...');
         setTimeout(() => {
-          history('/'); // navigates to product Component
+          history('/');
         }, 2000);
       } else {
         setErrorMessage('Invalid customerId or password.');
@@ -70,16 +70,6 @@ export default function SignIn() {
     }
 
   };
-
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-  //     email: data.get('email'),
-  //     password: data.get('password'),
-  //   });
-  // };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -99,7 +89,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 1 }}>
+          <Box sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
