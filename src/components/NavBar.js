@@ -17,7 +17,7 @@ import { ReactComponent as Logo } from '../webank-logo.svg';
 import Link from '@mui/material/Link';
 
 const pages = ['Login', 'Register', 'Open Account', 'Check Account Status'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+// const settings = ['Dashboard', 'Logout'];
 
 function NavBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -157,6 +157,14 @@ function NavBar() {
                         >
                             Open Account
                         </Button>
+                        <Button
+                            href="/logout"
+                            key="Logout"
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Logout
+                        </Button>
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
@@ -181,11 +189,18 @@ function NavBar() {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            {settings.map((setting) => (
+                            {/* {settings.map((setting) => (
                                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                                     <Typography textAlign="center">{setting}</Typography>
                                 </MenuItem>
-                            ))}
+                            ))} */}
+                            <MenuItem
+                                href="/logout"
+                                key="Logout" 
+                                onClick={handleCloseUserMenu}
+                                >
+                                <Typography textAlign="center">Logout</Typography>
+                            </MenuItem>
                         </Menu>
                     </Box>
                 </Toolbar>

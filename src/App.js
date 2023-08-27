@@ -1,6 +1,7 @@
 import './App.css';
 import HomePage from './components/HomePage';
 import SignIn from './components/Login';
+import Logout from './components/Logout';
 import NavBar from './components/NavBar';
 import OpenAccount from './components/OpenAccount';
 import SignUp from './components/Register';
@@ -24,6 +25,7 @@ function App() {
               <Route path='/login' Component={SignIn} />
               <Route path='/register' Component={SignUp} />
               <Route path='/openaccount' Component={OpenAccount} />
+              <Route path='/logout' Component={Logout} />
             </Routes>
           </Router>
         </div>
