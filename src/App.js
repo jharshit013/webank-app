@@ -1,4 +1,5 @@
 import './App.css';
+import EnhancedTable from './components/Account';
 import HomePage from './components/HomePage';
 import SignIn from './components/Login';
 import Logout from './components/Logout';
@@ -6,6 +7,8 @@ import NavBar from './components/NavBar';
 import OpenAccount from './components/OpenAccount';
 import SignUp from './components/Register';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import BasicTable from './components/TableAc';
+import EditAccount from './components/EditAccount';
 
 function App() {
   return (
@@ -26,6 +29,8 @@ function App() {
               <Route path='/register' Component={SignUp} />
               <Route path='/openaccount' Component={OpenAccount} />
               <Route path='/logout' Component={Logout} />
+              <Route path='/accounts' Component={BasicTable} />
+              <Route path='/accounts/:accountno' Component={EditAccount} />
             </Routes>
           </Router>
         </div>

@@ -158,6 +158,14 @@ function NavBar() {
                             Open Account
                         </Button>
                         <Button
+                            href="/accounts"
+                            key="Accounts"
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Accounts
+                        </Button>
+                        <Button
                             href="/logout"
                             key="Logout"
                             onClick={handleCloseNavMenu}
