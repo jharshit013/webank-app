@@ -19,9 +19,10 @@ import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthenticationService from '../service/AuthenticationService';
+import AccountService from '../service/AccountService';
 
 // import {getCurrentDate} from './utils'
 
@@ -45,6 +46,7 @@ const defaultTheme = createTheme();
 function Transaction() {
 
   const history = useNavigate();
+
   const [fromacc, setFromacc] = useState('');
   const [toacc, setToacc] = useState('');
   const [type, setType] = useState('');
@@ -55,6 +57,13 @@ function Transaction() {
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    AccountService.getAccountByNo(AuthenticationService.getLoggedInUsername()).then((response) => {
+      const account = response.data;
+      setFromacc(account.accountno);
+    })
+  }, []);
 
   const handleLogin = async () => {
     // if (!accountno || !password) {
@@ -186,7 +195,6 @@ function Transaction() {
               value={fromacc}
               onChange={(e) => setFromacc(e.target.value)}
             //   autoComplete="fromacc"
-              autoFocus
             />
             <TextField
               margin="normal"
@@ -198,6 +206,7 @@ function Transaction() {
               value={toacc}
               onChange={(e) => setToacc(e.target.value)}
             //   autoComplete="toacc"
+            autoFocus
             />
             {/* <TextField
               margin="normal"
@@ -259,23 +268,7 @@ function Transaction() {
             </Button>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/register" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/openaccount" variant="body2">
-                  {"Or first apply for the account? Apply"}
-                </Link>
-              </Grid>
-            </Grid>
+  
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />

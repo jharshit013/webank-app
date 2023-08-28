@@ -41,7 +41,6 @@ export default function EditAccount() {
   const history = useNavigate();
 
   const {accountno} = useParams()
-//   const [accountno, setAccountno] = useState('');
   const [balance, setBalance] = useState('');
   const [type, setType] = useState('');
 
@@ -124,7 +123,7 @@ export default function EditAccount() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Update
             </Button>
             <Button onClick={cancel.bind(this)}>Cancel</Button>
           </Box>

@@ -20,8 +20,9 @@ import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AccountService from '../service/AccountService';
 import AuthenticationService from '../service/AuthenticationService';
 
 // import {getCurrentDate} from './utils'
@@ -46,18 +47,7 @@ const defaultTheme = createTheme();
 function Payee() {
 
   const history = useNavigate();
-//   const [fromacc, setFromacc] = useState('');
-//   const [toacc, setToacc] = useState('');
-//   const [type, setType] = useState('');
-//   const [date, setDate] = useState('');
-//   const [amount, setAmount] = useState('');
-//   const [transactionpassword, setTransactionpassword] = useState('');
 
-    const [fromacc, setFromacc] = useState('');
-    const [toacc, setToacc] = useState('');
-    const [type, setType] = useState('');
-
-    const [errors, setErrors] = useState({});
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -65,6 +55,13 @@ function Payee() {
   const [payeeNickname, setPayeeNickname] = useState('');
   const [payeeAccountNo, setPayeeAccountNo] = useState('');
 
+  useEffect(() => {
+  AccountService.getAccountByNo(AuthenticationService.getLoggedInUsername()).then((response) => {
+    const account = response.data;
+    setPayerAccountNo(account.accountno);
+  })
+  }, []);
+  
   const handleLogin = async () => {
 
     try {
@@ -133,7 +130,6 @@ function Payee() {
               value={payerAccountNo}
               onChange={(e) => setPayerAccountNo(e.target.value)}
             //   autoComplete="fromacc"
-              autoFocus
             />
             <TextField
               margin="normal"
@@ -145,6 +141,7 @@ function Payee() {
               value={payeeNickname}
               onChange={(e) => setPayeeNickname(e.target.value)}
             //   autoComplete="toacc"
+            autoFocus
             />
             
             <TextField
@@ -171,23 +168,7 @@ function Payee() {
             </Button>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/register" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/openaccount" variant="body2">
-                  {"Or first apply for the account? Apply"}
-                </Link>
-              </Grid>
-            </Grid>
+            
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />

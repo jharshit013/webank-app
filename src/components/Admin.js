@@ -55,7 +55,8 @@ export default function AdminLogin() {
 
     try {
       const loginSuccess = await AdminService.login(admin);
-      console.log('API response:', loginSuccess.data); // Add this line
+      console.log('API response:', loginSuccess.data);
+      AdminService.registerSuccessfulAdmin(name);
       if (loginSuccess) {
         setSuccessMessage('Login successful. Redirecting...');
         setTimeout(() => {

@@ -17,6 +17,7 @@ import { ReactComponent as Logo } from '../webank-logo.svg';
 import Link from '@mui/material/Link';
 import { useNavigate } from 'react-router';
 import AuthenticationService from '../service/AuthenticationService';
+import AdminService from '../service/AdminService';
 
 // const pages = ['Login', 'Register', 'Open Account', 'Check Account Status'];
 // const settings = ['Dashboard', 'Logout'];
@@ -25,10 +26,15 @@ function NavBar() {
 
     const history = useNavigate();
 
+    const isAdminLoggedIn = AdminService.isAdminLoggedIn();
     const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
 
     const handleLogout = () => {
         AuthenticationService.logout();
+    }
+
+    const handleAdminLogout = () => {
+        AdminService.logoutAdmin();
     }
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -131,16 +137,47 @@ function NavBar() {
 
                     </Typography> */}
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                    
-                        { isUserLoggedIn ? (<>
-                        {/* <Button
+
+                        { isAdminLoggedIn ? (<>
+                        
+                            <Button
+                            href="/logout"
+                            key="Logout"
+                            onClick={handleAdminLogout}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                Logout
+                            </Button>
+
+                            <Button
                             href="/accounts"
-                            key="Accounts"
+                            key="Account"
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                Accounts
+                            </Button>
+
+                        </>):(<>
+                        
+                            { isUserLoggedIn ? (<>
+
+                        <Button
+                            href="/transaction"
+                            key="Transaction"
                             onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: 'white', display: 'block' }}
                         >
-                            Accounts
-                        </Button> */}
+                            Fund Transafer
+                        </Button>
+                        <Button
+                            href="/payee"
+                            key="Payee"
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Add Payee
+                        </Button>
                         <Button
                             href="/logout"
                             key="Logout"
@@ -149,6 +186,7 @@ function NavBar() {
                         >
                             Logout
                         </Button>
+
                         </>) : (<>
                             <Button
                             href="/login"
@@ -174,6 +212,18 @@ function NavBar() {
                         >
                             Open Account
                         </Button>
+
+                        <Button
+                            href="/admin"
+                            key="Admin"
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Admin
+                        </Button>
+
+                        </>) }
+
                         </>) }
 
                     </Box>
