@@ -59,10 +59,14 @@ function Transaction() {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
+    if(!AuthenticationService.isUserLoggedIn()){
+      history('/login');
+  } else {
     AccountService.getAccountByNo(AuthenticationService.getLoggedInUsername()).then((response) => {
       const account = response.data;
       setFromacc(account.accountno);
     })
+  }
   }, []);
 
   const handleLogin = async () => {
@@ -264,7 +268,7 @@ function Transaction() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Submit Details
+              Send Money
             </Button>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}

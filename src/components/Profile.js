@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AuthenticationService from '../service/AuthenticationService';
 import AccountService from '../service/AccountService';
 import { useState, useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
 
 function Copyright() {
     return (
@@ -27,13 +28,19 @@ const defaultTheme = createTheme();
 
 export default function Profile() {
 
+    const history = useNavigate();
+
     const [accbalance, setAccbalance] = useState('');
 
     useEffect(() => {
-        AccountService.getAccountByNo(AuthenticationService.getLoggedInUsername()).then((response) => {
+        if(!AuthenticationService.isUserLoggedIn()){
+            history('/login');
+        } else {
+            AccountService.getAccountByNo(AuthenticationService.getLoggedInUsername()).then((response) => {
             const acc = response.data;
             setAccbalance(acc.balance);
-        })
+         })
+        }
     })
 
 

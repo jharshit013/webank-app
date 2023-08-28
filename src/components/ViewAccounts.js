@@ -15,6 +15,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
 
+import AdminService from '../service/AdminService';
+
 export default function ViewAccounts() {
 
     
@@ -24,7 +26,11 @@ export default function ViewAccounts() {
     const [message, setMessage] = useState('');
 
     useEffect(() => {
+      if(!AdminService.isAdminLoggedIn()){
+        history('/admin');
+    } else {
         fetchAccounts();
+    }
     }, []);
 
     const fetchAccounts = () => {

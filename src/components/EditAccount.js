@@ -18,6 +18,7 @@ import { useState, useEffect } from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import AuthenticationService from '../service/AuthenticationService';
 import AccountService from '../service/AccountService';
+import AdminService from '../service/AdminService';
 
 function Copyright(props) {
   return (
@@ -45,11 +46,15 @@ export default function EditAccount() {
   const [type, setType] = useState('');
 
   useEffect(() => {
+    if(!AdminService.isAdminLoggedIn()){
+      history('/admin');
+  } else {
     AccountService.getAccountByNo(accountno).then((response) => {
         const account = response.data;
         setBalance(account.balance);
         setType(account.type);
     });
+  }
   }, [accountno]);
 
   const updateAccount = (e) => {

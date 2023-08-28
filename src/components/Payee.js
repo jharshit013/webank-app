@@ -56,10 +56,14 @@ function Payee() {
   const [payeeAccountNo, setPayeeAccountNo] = useState('');
 
   useEffect(() => {
+    if(!AuthenticationService.isUserLoggedIn()){
+      history('/login');
+  } else {
   AccountService.getAccountByNo(AuthenticationService.getLoggedInUsername()).then((response) => {
     const account = response.data;
     setPayerAccountNo(account.accountno);
   })
+}
   }, []);
   
   const handleLogin = async () => {

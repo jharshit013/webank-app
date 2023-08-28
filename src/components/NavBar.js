@@ -150,6 +150,16 @@ function NavBar() {
                         Add Payee
                     </Button>
                     </MenuItem>
+                    <MenuItem key="Transaction" onClick={handleCloseNavMenu}>
+                    <Button
+                        href="/transaction"
+                        key="Transaction"
+                        onClick={handleCloseNavMenu}
+                        sx={{ my: 2, color: 'white', display: 'block' }}
+                    >
+                        Fund Transfer
+                    </Button>
+                    </MenuItem>
                     <MenuItem key="Logout" onClick={handleCloseNavMenu}>
                     <Button
                         href="/logout"
@@ -271,6 +281,14 @@ function NavBar() {
                             sx={{ my: 2, color: 'white', display: 'block' }}
                         >
                             Add Payee
+                        </Button>
+                        <Button
+                            href="/transaction"
+                            key="Transaction"
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Fund Transfer
                         </Button>
                         <Button
                             href="/logout"
