@@ -12,6 +12,7 @@ import EditAccount from './components/EditAccount';
 import AdminLogin from './components/Admin';
 import Transaction from './components/Transaction';
 import Payee from './components/Payee';
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
               <Route path='/admin' Component={AdminLogin} />
               <Route path='/transaction' Component={Transaction} />
               <Route path='/payee' Component={Payee} />
+              <Route path='/profile' Component={Profile} />
             </Routes>
           </Router>
         </div>

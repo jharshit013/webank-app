@@ -163,12 +163,12 @@ function NavBar() {
                             { isUserLoggedIn ? (<>
 
                         <Button
-                            href="/transaction"
-                            key="Transaction"
+                            href="/profile"
+                            key="Profile"
                             onClick={handleCloseNavMenu}
                             sx={{ my: 2, color: 'white', display: 'block' }}
                         >
-                            Fund Transafer
+                            Profile
                         </Button>
                         <Button
                             href="/payee"

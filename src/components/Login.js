@@ -60,7 +60,7 @@ export default function SignIn() {
       if (loginSuccess) {
         setSuccessMessage('Login successful. Redirecting...');
         setTimeout(() => {
-          history('/');
+          history('/profile');
         }, 2000);
       } else {
         setErrorMessage('Invalid customerId or password.');
