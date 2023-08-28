@@ -3,6 +3,7 @@ import HomePage from './components/HomePage';
 import Transaction from './components/Transaction'
 import SignIn from './components/Login';
 import NavBar from './components/NavBar';
+import Payee from './components/Payee';
 import OpenAccount from './components/OpenAccount';
 import SignUp from './components/Register';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -26,6 +27,7 @@ function App() {
               <Route path='/register' Component={SignUp} />
               <Route path='/openaccount' Component={OpenAccount} />
               <Route path='/transaction' Component={Transaction} />
+              <Route path='/payee' Component={Payee} />
             </Routes>
           </Router>
         </div>

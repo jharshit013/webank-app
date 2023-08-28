@@ -1,4 +1,5 @@
 import * as React from 'react';
+import '../style/NavBar.css'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -118,7 +119,7 @@ function NavBar() {
                             textDecoration: 'none',
                         }}
                     >
-                        <Link href="/">
+                        <Link href="/" id="logo-text">
                             WeBank
                         </Link>
 
@@ -165,6 +166,15 @@ function NavBar() {
                             sx={{ my: 2, color: 'white', display: 'block' }}
                         >
                             TRANSACTION
+                        </Button>
+
+                        <Button
+                            href="/payee"
+                            key="payee"
+                            onClick={handleCloseNavMenu}
+                            sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            PAYEE
                         </Button>
 
                     </Box>
