@@ -105,7 +105,7 @@ function NavBar() {
                         { isAdminLoggedIn ? (<>
                         
                         <MenuItem key="Logout" onClick={handleCloseNavMenu}>
-                        <Button
+                        <Button variant='contained'
                         href="/logout"
                         key="Logout"
                         onClick={handleAdminLogout}
@@ -116,7 +116,7 @@ function NavBar() {
                         </MenuItem>
 
                         <MenuItem key="Accounts" onClick={handleCloseNavMenu}>
-                        <Button
+                        <Button variant='contained'
                         href="/accounts"
                         key="Account"
                         onClick={handleCloseNavMenu}
@@ -131,7 +131,7 @@ function NavBar() {
                         { isUserLoggedIn ? (<>
 
                     <MenuItem key="Profile" onClick={handleCloseNavMenu}>
-                    <Button
+                    <Button variant='contained'
                         href="/profile"
                         key="Profile"
                         onClick={handleCloseNavMenu}
@@ -141,7 +141,7 @@ function NavBar() {
                     </Button>
                     </MenuItem>
                     <MenuItem key="Payee" onClick={handleCloseNavMenu}>
-                    <Button
+                    <Button variant='contained'
                         href="/payee"
                         key="Payee"
                         onClick={handleCloseNavMenu}
@@ -151,7 +151,7 @@ function NavBar() {
                     </Button>
                     </MenuItem>
                     <MenuItem key="Transaction" onClick={handleCloseNavMenu}>
-                    <Button
+                    <Button variant='contained'
                         href="/transaction"
                         key="Transaction"
                         onClick={handleCloseNavMenu}
@@ -161,7 +161,7 @@ function NavBar() {
                     </Button>
                     </MenuItem>
                     <MenuItem key="Logout" onClick={handleCloseNavMenu}>
-                    <Button
+                    <Button variant='contained'
                         href="/logout"
                         key="Logout"
                         onClick={handleLogout}
@@ -174,7 +174,7 @@ function NavBar() {
                     </>) : (<>
 
                         <MenuItem key="Login" onClick={handleCloseNavMenu}>
-                        <Button
+                        <Button variant='contained'
                         href="/login"
                         key="Login"
                         onClick={handleCloseNavMenu}
@@ -184,7 +184,7 @@ function NavBar() {
                     </Button>
                     </MenuItem>
                     <MenuItem key="Register" onClick={handleCloseNavMenu}>
-                    <Button
+                    <Button variant='contained'
                         href="/register"
                         key="Register"
                         onClick={handleCloseNavMenu}
@@ -194,7 +194,7 @@ function NavBar() {
                     </Button>
                     </MenuItem>
                     <MenuItem key="OpenAccount" onClick={handleCloseNavMenu}>
-                    <Button
+                    <Button variant='contained'
                         href="/openaccount"
                         key="OpenAccount"
                         onClick={handleCloseNavMenu}
@@ -204,7 +204,7 @@ function NavBar() {
                     </Button>
                     </MenuItem>
                     <MenuItem key="Admin" onClick={handleCloseNavMenu}>
-                    <Button
+                    <Button variant='contained'
                         href="/admin"
                         key="Admin"
                         onClick={handleCloseNavMenu}
