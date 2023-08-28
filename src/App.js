@@ -9,6 +9,7 @@ import SignUp from './components/Register';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BasicTable from './components/TableAc';
 import EditAccount from './components/EditAccount';
+import AdminLogin from './components/Admin';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               <Route path='/logout' Component={Logout} />
               <Route path='/accounts' Component={BasicTable} />
               <Route path='/accounts/:accountno' Component={EditAccount} />
+              <Route path='/admin' Component={AdminLogin} />
             </Routes>
           </Router>
         </div>

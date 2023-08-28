@@ -28,7 +28,7 @@ class AuthenticationService {
     static async login(account) {
         try {
             const response = await axios.post('http://localhost:8086/webank/api/login', account);
-            console.log('API response:', response.data + "Hello" + response.data.success);
+            console.log('API response:', response.data + " " + response.data.success);
             if (response.data === true) {
                 return true;
             } else {

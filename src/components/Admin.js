@@ -6,7 +6,6 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
@@ -15,7 +14,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AuthenticationService from '../service/AuthenticationService';
+import AdminService from '../service/AdminService';
 
 function Copyright(props) {
   return (
@@ -34,39 +33,40 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function SignIn() {
+export default function AdminLogin() {
 
   const history = useNavigate();
-  const [accountno, setAccountno] = useState('');
+
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
   const handleLogin = async () => {
-    if (!accountno || !password) {
-      setErrorMessage('Please enter both account no and password.');
+    if (!name || !password) {
+      setErrorMessage('Please enter both username and password.');
       return;
     }
 
-    const account = {
-      accountno,
+    const admin = {
+      name,
       password
     };
 
     try {
-      const loginSuccess = await AuthenticationService.login(account);
+      const loginSuccess = await AdminService.login(admin);
       console.log('API response:', loginSuccess.data); // Add this line
       if (loginSuccess) {
         setSuccessMessage('Login successful. Redirecting...');
         setTimeout(() => {
-          history('/');
+          history('/accounts');
         }, 2000);
       } else {
-        setErrorMessage('Invalid customerId or password.');
+        setErrorMessage('IUnauthorized access.');
       }
     } catch (error) {
       console.error('Login error', error);
-      setErrorMessage('An error occurred during login.');
+      setErrorMessage('IUnauthorized access.');
     }
 
   };
@@ -87,19 +87,19 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Admin
           </Typography>
           <Box sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
               fullWidth
-              id="customerid"
-              label="Customer ID"
-              name="customerid"
-              value={accountno}
-              onChange={(e) => setAccountno(e.target.value)}
-              autoComplete="customerid"
+              id="name"
+              label="Username"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              autoComplete="name"
               autoFocus
             />
             <TextField
@@ -129,23 +129,6 @@ export default function SignIn() {
             </Button>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/register" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/openaccount" variant="body2">
-                  {"Or first apply for the account? Apply"}
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
