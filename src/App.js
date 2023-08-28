@@ -1,5 +1,4 @@
 import './App.css';
-import EnhancedTable from './components/Account';
 import HomePage from './components/HomePage';
 import SignIn from './components/Login';
 import Logout from './components/Logout';
@@ -7,7 +6,7 @@ import NavBar from './components/NavBar';
 import OpenAccount from './components/OpenAccount';
 import SignUp from './components/Register';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import BasicTable from './components/TableAc';
+import ViewAccounts from './components/ViewAccounts';
 import EditAccount from './components/EditAccount';
 import AdminLogin from './components/Admin';
 import Transaction from './components/Transaction';
@@ -33,7 +32,7 @@ function App() {
               <Route path='/register' Component={SignUp} />
               <Route path='/openaccount' Component={OpenAccount} />
               <Route path='/logout' Component={Logout} />
-              <Route path='/accounts' Component={BasicTable} />
+              <Route path='/accounts' Component={ViewAccounts} />
               <Route path='/accounts/:accountno' Component={EditAccount} />
               <Route path='/admin' Component={AdminLogin} />
               <Route path='/transaction' Component={Transaction} />

@@ -44,20 +44,11 @@ export default function SignUp() {
     password: '',
     transactionpassword: '',
     balance: 4000000,
-    type: 'current'
+    type: 'savings'
   });
 
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-  //     email: data.get('email'),
-  //     password: data.get('password'),
-  //   });
-  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -89,7 +80,7 @@ export default function SignUp() {
       try {
         await AuthenticationService.registerAccount(account);
         setSuccessMessage('Netbanking Registration successful!');
-        alert("Netbanking Registration Successful");
+        alert("Netbanking Registration Successful. Please Login with CustomerID:"+(account.accountno));
         setTimeout(() => {
           history('/login');
         }, 3000)
@@ -99,7 +90,7 @@ export default function SignUp() {
         setSuccessMessage('An error occurred during netbanking registration.');
       }
     } else {
-      console.log("Yoo");
+      // console.log("Yoo");
       setErrors(validationErrors);
     }
   };
@@ -123,13 +114,13 @@ export default function SignUp() {
       validateErrors.transactionpassword = 'Transaction Password must be at least 6 characters.';
     }
 
-    if(!account.balance) {
-      validateErrors.balance = 'Account balance required.';
-    }
+    // if(!account.balance) {
+    //   validateErrors.balance = 'Account balance required.';
+    // }
 
-    if(!account.type) {
-      validateErrors.type = 'Account type required.';
-    }
+    // if(!account.type) {
+    //   validateErrors.type = 'Account type required.';
+    // }
 
     return validateErrors;
 
@@ -156,27 +147,6 @@ export default function SignUp() {
           {successMessage && <p>{successMessage}</p>}
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              {/* <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid> */}
-              {/* <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid> */}
               <Grid item xs={12}>
                 <TextField
                   required
@@ -218,7 +188,7 @@ export default function SignUp() {
                 />
               </Grid>
               {errors.transactionpassword && <p>{errors.transactionpassword}</p>}
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -240,14 +210,8 @@ export default function SignUp() {
                   value={account.type}
                   onChange={handleChange}
                 />
-              </Grid>
-              {errors.type && <p>{errors.type}</p>}
-              {/* <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label=""
-                />
               </Grid> */}
+              {errors.type && <p>{errors.type}</p>}
             </Grid>
             <Button
               type="submit"

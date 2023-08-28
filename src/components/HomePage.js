@@ -39,6 +39,7 @@ export default function HomePage() {
                         >
                             WeBank
                         </Typography>
+                        <img src='../webank-logo.png'/>
                         <Typography variant="h5" align="center" color="text.secondary" paragraph>
                             Welcome to WeBank, where your financial aspirations find a home.
                             As a progressive and customer-centric institution,

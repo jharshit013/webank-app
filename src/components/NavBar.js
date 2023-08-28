@@ -11,7 +11,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Person2Rounded } from '@mui/icons-material';
 import { SvgIcon } from '@mui/material';
 import { ReactComponent as Logo } from '../webank-logo.svg';
 import Link from '@mui/material/Link';
@@ -43,16 +42,9 @@ function NavBar() {
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
-    };
-
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
     };
 
     return (
@@ -80,7 +72,7 @@ function NavBar() {
                         WeBank
                     </Typography>
 
-                    {/* <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
                             aria-label="account of current user"
@@ -109,14 +101,116 @@ function NavBar() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                          >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
-                                </MenuItem>
-                            ))}
+
+                        { isAdminLoggedIn ? (<>
+                        
+                        <MenuItem key="Logout" onClick={handleCloseNavMenu}>
+                        <Button
+                        href="/logout"
+                        key="Logout"
+                        onClick={handleAdminLogout}
+                        sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Logout
+                        </Button>
+                        </MenuItem>
+
+                        <MenuItem key="Accounts" onClick={handleCloseNavMenu}>
+                        <Button
+                        href="/accounts"
+                        key="Account"
+                        onClick={handleCloseNavMenu}
+                        sx={{ my: 2, color: 'white', display: 'block' }}
+                        >
+                            Accounts
+                        </Button>
+                        </MenuItem>
+
+                    </>):(<>
+                    
+                        { isUserLoggedIn ? (<>
+
+                    <MenuItem key="Profile" onClick={handleCloseNavMenu}>
+                    <Button
+                        href="/profile"
+                        key="Profile"
+                        onClick={handleCloseNavMenu}
+                        sx={{ my: 2, color: 'white', display: 'block' }}
+                    >
+                        Profile
+                    </Button>
+                    </MenuItem>
+                    <MenuItem key="Payee" onClick={handleCloseNavMenu}>
+                    <Button
+                        href="/payee"
+                        key="Payee"
+                        onClick={handleCloseNavMenu}
+                        sx={{ my: 2, color: 'white', display: 'block' }}
+                    >
+                        Add Payee
+                    </Button>
+                    </MenuItem>
+                    <MenuItem key="Logout" onClick={handleCloseNavMenu}>
+                    <Button
+                        href="/logout"
+                        key="Logout"
+                        onClick={handleLogout}
+                        sx={{ my: 2, color: 'white', display: 'block' }}
+                    >
+                        Logout
+                    </Button>
+                    </MenuItem>
+
+                    </>) : (<>
+
+                        <MenuItem key="Login" onClick={handleCloseNavMenu}>
+                        <Button
+                        href="/login"
+                        key="Login"
+                        onClick={handleCloseNavMenu}
+                        sx={{ my: 2, color: 'white', display: 'block' }}
+                    >
+                        Login
+                    </Button>
+                    </MenuItem>
+                    <MenuItem key="Register" onClick={handleCloseNavMenu}>
+                    <Button
+                        href="/register"
+                        key="Register"
+                        onClick={handleCloseNavMenu}
+                        sx={{ my: 2, color: 'white', display: 'block' }}
+                    >
+                        Register
+                    </Button>
+                    </MenuItem>
+                    <MenuItem key="OpenAccount" onClick={handleCloseNavMenu}>
+                    <Button
+                        href="/openaccount"
+                        key="OpenAccount"
+                        onClick={handleCloseNavMenu}
+                        sx={{ my: 2, color: 'white', display: 'block' }}
+                    >
+                        Open Account
+                    </Button>
+                    </MenuItem>
+                    <MenuItem key="Admin" onClick={handleCloseNavMenu}>
+                    <Button
+                        href="/admin"
+                        key="Admin"
+                        onClick={handleCloseNavMenu}
+                        sx={{ my: 2, color: 'white', display: 'block' }}
+                    >
+                        Admin
+                    </Button>
+                    </MenuItem>
+
+                    </>) }
+
+                    </>) }
+                            
                         </Menu>
-                    </Box> */}
-                    {/* <Typography
+                    </Box>
+                    <Typography
                         variant="h5"
                         noWrap
                         component="a"
@@ -135,7 +229,7 @@ function NavBar() {
                             WeBank
                         </Link>
 
-                    </Typography> */}
+                    </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 
                         { isAdminLoggedIn ? (<>
@@ -227,46 +321,6 @@ function NavBar() {
                         </>) }
 
                     </Box>
-
-                    {/* <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar><Person2Rounded /></Avatar>
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            
-                            <MenuItem
-                                href="/logout"
-                                key="Logout" 
-                                onClick={handleCloseUserMenu}
-                                >
-                                <Typography textAlign="center">Logout</Typography>
-                            </MenuItem>
-                            <MenuItem
-                                href="/logout"
-                                key="Dashboard" 
-                                onClick={handleCloseUserMenu}
-                                >
-                                <Typography textAlign="center">Dashboard</Typography>
-                            </MenuItem>
-                        </Menu>
-                    </Box> */}
                 </Toolbar>
             </Container>
         </AppBar >

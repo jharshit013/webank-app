@@ -11,19 +11,11 @@ import { useState, useEffect } from 'react';
 import AccountService from '../service/AccountService';
 import {useNavigate} from "react-router-dom";
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { IconButton } from '@mui/material';
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
-export default function BasicTable() {
+export default function ViewAccounts() {
 
     
     const history = useNavigate();
@@ -51,6 +43,10 @@ export default function BasicTable() {
         });
     };
 
+    const editAccount = (accountno) => {
+      history(`/accounts/${accountno}`);
+    }
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -61,8 +57,6 @@ export default function BasicTable() {
             <TableCell align="right">Balance</TableCell>
             <TableCell align="right">Type</TableCell>
             <TableCell align="right">Actions</TableCell>
-            {/* <TableCell align="right">Carbs&nbsp;(g)</TableCell> */}
-            {/* <TableCell align="right">Protein&nbsp;(g)</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -77,8 +71,12 @@ export default function BasicTable() {
               <TableCell>{acc.accountno}</TableCell>
               <TableCell align="right">{acc.balance}</TableCell>
               <TableCell align="right">{acc.type}</TableCell>
-              {/* <TableCell align="right">{acc.type}</TableCell> */}
-              {/* <TableCell align="right">{row.protein}</TableCell> */}
+              <TableCell align="right">
+                {/* <Button onClick={() => editAccount(acc.accountno)}>Edit</Button> */}
+                <IconButton aria-label='edit' onClick={() => editAccount(acc.accountno)}><EditIcon /></IconButton>
+                {/* <Button onClick={() => deleteAccount(acc.accountno)}>Delete</Button> */}
+                <IconButton aria-label='delete' onClick={() => deleteAccount(acc.accountno)}><DeleteIcon /></IconButton>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
