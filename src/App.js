@@ -10,6 +10,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BasicTable from './components/TableAc';
 import EditAccount from './components/EditAccount';
 import AdminLogin from './components/Admin';
+import Transaction from './components/Transaction';
+import Payee from './components/Payee';
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
               <Route path='/accounts' Component={BasicTable} />
               <Route path='/accounts/:accountno' Component={EditAccount} />
               <Route path='/admin' Component={AdminLogin} />
+              <Route path='/transaction' Component={Transaction} />
+              <Route path='/payee' Component={Payee} />
             </Routes>
           </Router>
         </div>
