@@ -55,7 +55,8 @@ export default function SignIn() {
 
     try {
       const loginSuccess = await AuthenticationService.login(account);
-      console.log('API response:', loginSuccess.data); // Add this line
+      console.log('API response:', loginSuccess.data);
+      AuthenticationService.registerSuccessfulLogin(accountno);
       if (loginSuccess) {
         setSuccessMessage('Login successful. Redirecting...');
         setTimeout(() => {

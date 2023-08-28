@@ -1,6 +1,12 @@
 import axios from "axios";
 
+export const USER_NAME_SESSION_ATTRIBUTE_NAME='authenticatedUser';
+
 class AuthenticationService {
+
+    static setSessionAttribute(key, value){
+        localStorage.setItem(key, value);
+    }
 
     static async registerCustomer(customer) {
         try {
@@ -38,6 +44,27 @@ class AuthenticationService {
             console.error('Login error', error);
             throw new Error('An error occurred during login.');
         }
+    }
+
+    static registerSuccessfulLogin(username) {
+        sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, username);
+        console.log("First"+username);
+    }
+
+    static isUserLoggedIn() {
+        let user = sessionStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME)
+        if  (user === null) return false
+        return true
+    }
+
+    static getLoggedInUsername() {
+        let user = sessionStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME)
+        if (user === null) return ''
+        return user
+    }
+
+    static logout() {
+        sessionStorage.removeItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
     }
 
 }
